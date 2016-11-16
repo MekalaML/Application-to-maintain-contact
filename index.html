@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="angular.js"></script>
+    <title>Contact Application - Mekala</title>
+    <script src="appContact.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+</head>
+
+<body ng-app="mekalaapp">
+    <h1>Contact List View App</h1>
+    <div class="container" ng-controller="contactCtrl as ctrl">
+        <div class="col-md-6">
+        <ul class="list-group">
+            <button class="list-group-item" ng-repeat="contact in ctrl.contacts" ng-click="ctrl.selectone($index)">
+                     <span>{{ contact.name.first + " " + contact.name.last }}</span>
+            </button>
+        </ul>
+        </div>
+        <button ng-click="ctrl.adduser()"> Add User </button>
+
+        <div class="col-md-6">
+        <div class="alert alert-success" ng-if="ctrl.successMessage">{{ ctrl.successMessage }}</div>
+        <div class="alert alert-danger" ng-if="ctrl.errorMessage">{{ ctrl.errorMessage }}</div>
+
+        <div class="media">
+            <div class="media-left media-top">
+                <a href="#">
+                    <img ng-src="{{ ctrl.selected.picture.medium }}"></img>
+                </a>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">Contact details</h4>
+                <button ng-click="ctrl.editmodeon()" ng-hide="ctrl.editmode">Edit</button>
+                <button ng-click="ctrl.updatecontact()" ng-show="ctrl.editmode">Save</button>
+                <p>Name: <span ng-hide="ctrl.editmode">{{ ctrl.selected.name.first }}</span>
+                        <input ng-show="ctrl.editmode" type="text" ng-model="ctrl.selected.name.first"/></p>
+                <p>Location: <span ng-hide="ctrl.editmode">{{ ctrl.selected.location.city }}</span>
+                        <input ng-show="ctrl.editmode" type="text" ng-model="ctrl.selected.location.city"/></p>
+                <p>Contact: <span ng-hide="ctrl.editmode">{{ ctrl.selected.phone }}</span>
+                        <input ng-show="ctrl.editmode" type="text" ng-model="ctrl.selected.phone"/></p>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
